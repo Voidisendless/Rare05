@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Exiled;
-using Exiled.API.Features;
-using Exiled.CustomItems.API.EventArgs;
+﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs;
-using Exiled.Events.Features;
-using Unity.Engine;
+using Exiled.Events.EventArgs.Scp914;
+using Exiled.API.Features.Items;
+using Exiled.API.Features.Pickups;
+using UnityEngine;
+using System.Linq;
 
 namespace Rare05
 {
     public class EventHandlers
     {
+        private readonly Config _config;
 
-        public static void OnRoundStarted()
+        public EventHandlers(Config config)
         {
-            var config = Plugin.Singleton.Config;
-            var rooms = Map.Rooms.Where(room => config.SpawnRooms.Contains(room.Type)).ToList();
+            _config = config;
+        }
+
+        public void OnRoundStarted()
+        {
+            var config = _config;
+            var rooms = Room.List.Where(room => config.SpawnRooms.Contains(room.Type)).ToList();
             int spawnCount = 0;
 
             foreach (var room in rooms)
@@ -28,20 +30,26 @@ namespace Rare05
 
                 if (UnityEngine.Random.Range(0f, 1f) <= config.SpawnChance)
                 {
-                    var item = room.SpawnItem(ItemType.KeycardO5);
+                    Pickup.CreateAndSpawn(ItemType.KeycardO5, room.Transform.position + Vector3.up, Quaternion.identity, null);
                     spawnCount++;
                 }
-
-
             }
         }
-        public void OnItemUpgraded(UpgradingItemsEventArgs ev)
+
+        public void OnUpgradingPickup(UpgradingPickupEventArgs ev)
         {
-            if (ev.OutputItem == ItemType.KeycardO5)
+            if (ev.Pickup.Type == ItemType.KeycardO5)
+            {
+                ev.IsAllowed = false;
+            }
+        }
+
+        public void OnUpgradingItem(UpgradingInventoryItemEventArgs ev)
+        {
+            if (ev.Item.Type == ItemType.KeycardO5)
             {
                 ev.IsAllowed = false;
             }
         }
     }
 }
-

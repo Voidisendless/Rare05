@@ -21,8 +21,8 @@ namespace Rare05
         [Description("List of room types where 05 Keycards can spawn.")]
         public List<RoomType> SpawnRooms { get; set; } = new List<RoomType>
     {
-        RoomType.Hid,
-        RoomType.Scp079
+        RoomType.HczHid,
+        RoomType.Hcz079
     };
 
         [Description("Maximum number of 05 Keycards that can spawn per round.")]
