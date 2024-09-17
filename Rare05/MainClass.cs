@@ -7,6 +7,7 @@ namespace Rare05
 {
     public class Rare05 : Plugin<Config>
     {
+        //setting basic plugin details
         public override string Name => "Rare05";
         public override string Author => "voidis3ndless";
         public override Version Version => new Version(1, 0, 0);
@@ -19,7 +20,7 @@ namespace Rare05
 
             eventHandlers = new EventHandlers(Config);
 
-            // Register event handlers
+            //Subscribe to events
             Exiled.Events.Handlers.Server.RoundStarted += eventHandlers.OnRoundStarted;
             Exiled.Events.Handlers.Scp914.UpgradingPickup += eventHandlers.OnUpgradingPickup;
             Exiled.Events.Handlers.Scp914.UpgradingInventoryItem += eventHandlers.OnUpgradingItem;
@@ -30,7 +31,7 @@ namespace Rare05
         public override void OnDisabled()
         {
             Log.Info("Rare05 has been disabled!");
-
+            //Unsubscribe from events
             Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
             Exiled.Events.Handlers.Scp914.UpgradingPickup -= eventHandlers.OnUpgradingPickup;
             Exiled.Events.Handlers.Scp914.UpgradingInventoryItem -= eventHandlers.OnUpgradingItem;

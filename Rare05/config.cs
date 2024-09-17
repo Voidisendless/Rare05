@@ -24,10 +24,10 @@ namespace Rare05
         RoomType.HczHid,
         RoomType.Hcz079
     };
-
+        //maximum amount of 05's that can spawn in map
         [Description("Maximum number of 05 Keycards that can spawn per round.")]
         public int Max05Spawns { get; set; } = 1;
-
+        //The chance that the 05 Keycard will spawn in each room
         [Description("Chance for an 05 Keycard to spawn in each selected room.")]
         public float SpawnChance { get; set; } = 0.25f;
     }
