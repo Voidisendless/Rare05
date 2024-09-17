@@ -19,6 +19,9 @@ namespace Rare05
 
         public void OnRoundStarted()
         {
+            if (_config.Debug)
+                Log.Debug("Round started event triggered.");
+
             var config = _config;
             var rooms = Room.List.Where(room => config.SpawnRooms.Contains(room.Type)).ToList();
             int spawnCount = 0;
@@ -30,6 +33,9 @@ namespace Rare05
 
                 if (UnityEngine.Random.Range(0f, 1f) <= config.SpawnChance)
                 {
+                    if (_config.Debug)
+                        Log.Debug($"Spawning O5 Keycard in room {room.Type}");
+
                     Pickup.CreateAndSpawn(ItemType.KeycardO5, room.Transform.position + Vector3.up, Quaternion.identity, null);
                     spawnCount++;
                 }
@@ -38,9 +44,14 @@ namespace Rare05
 
         public void OnUpgradingPickup(UpgradingPickupEventArgs ev)
         {
+            if (_config.Debug)
+                Log.Debug("UpgradingPickup event triggered.");
+
             if (ev.Pickup.Type == ItemType.KeycardO5)
             {
                 ev.IsAllowed = false;
+                if (_config.Debug)
+                    Log.Debug("O5 Keycard upgrade blocked.");
             }
         }
 
