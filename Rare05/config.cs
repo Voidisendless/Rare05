@@ -14,8 +14,8 @@ namespace Rare05
 {
     public class Config : IConfig
     {
-        public bool IsEnabled { get; set; }
-        public bool Debug { get; set; }
+        public bool IsEnabled { get; set; } = true;
+        public bool Debug { get; set; } = true;
 
 
         [Description("List of room types where 05 Keycards can spawn.")]
@@ -26,9 +26,9 @@ namespace Rare05
     };
         //maximum amount of 05's that can spawn in map
         [Description("Maximum number of 05 Keycards that can spawn per round.")]
-        public int Max05Spawns { get; set; } = 1;
+        public int Max05Spawns { get; set; } = 4;
         //The chance that the 05 Keycard will spawn in each room
         [Description("Chance for an 05 Keycard to spawn in each selected room.")]
-        public float SpawnChance { get; set; } = 0.25f;
+        public float SpawnChance { get; set; } = 1f;
     }
 }

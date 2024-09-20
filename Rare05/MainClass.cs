@@ -2,6 +2,7 @@
 using Exiled.Events.EventArgs;
 using Exiled.Events.EventArgs.Scp914;
 using System;
+using Exiled.Events.Features;
 
 namespace Rare05
 {
@@ -24,6 +25,8 @@ namespace Rare05
             Exiled.Events.Handlers.Server.RoundStarted += eventHandlers.OnRoundStarted;
             Exiled.Events.Handlers.Scp914.UpgradingPickup += eventHandlers.OnUpgradingPickup;
             Exiled.Events.Handlers.Scp914.UpgradingInventoryItem += eventHandlers.OnUpgradingItem;
+            Exiled.Events.Handlers.Scp914.Activating += eventHandlers.OnScp914Activating;
+
 
             base.OnEnabled();
         }
@@ -35,6 +38,7 @@ namespace Rare05
             Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
             Exiled.Events.Handlers.Scp914.UpgradingPickup -= eventHandlers.OnUpgradingPickup;
             Exiled.Events.Handlers.Scp914.UpgradingInventoryItem -= eventHandlers.OnUpgradingItem;
+            Exiled.Events.Handlers.Scp914.Activating -= eventHandlers.OnScp914Activating;
 
             base.OnDisabled();
         }
